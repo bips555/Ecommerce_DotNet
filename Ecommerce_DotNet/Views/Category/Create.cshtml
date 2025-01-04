@@ -7,10 +7,12 @@
         <div class="mb-3 row">
             <label asp-for="Name" class="p-1"></label>
             <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
         </div>
         <div class="mb-3 row">
             <label asp-for="DisplayOrder" class="p-1"></label>
             <input asp-for="DisplayOrder"  class="form-control" />
+            <span asp-validation-for="DisplayOrder" class="text-danger"></span>
         </div>
         <div class="row">
             <div class="col-6">
@@ -22,3 +24,8 @@
         </div>
 </div>
 </form>
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial"/>
+    }
+}
