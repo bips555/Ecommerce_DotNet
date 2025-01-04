@@ -5,7 +5,17 @@
 @{
     List<Category> categoryList;
 }
-<h1>Category</h1>
+<div class="container">
+    <div class="row pt-4">
+        <div class="col-6">
+           <h2 class="text-primary">
+                Category List
+           </h2>
+        </div>
+        <div class="col-6 text-end pb-3">
+            <a asp-action="Create" asp-controller="Category" class="btn btn-primary">Create new Category</a>
+        </div>
+    </div>
 <table class="table table-bordered table-striped">
     <thead>
         <tr>
@@ -24,3 +34,4 @@
        }
     </tbody>
 </table>
+</div>
