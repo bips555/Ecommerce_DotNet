@@ -24,9 +24,9 @@ namespace Ecommerce_DotNet.Controllers
         [HttpPost]
         public IActionResult Create(Category category)
         {
-            if(category.Name == category.DisplayOrder.ToString())
+            if (category.Name == category.DisplayOrder.ToString())
             {
-                ModelState.AddModelError("name","Name cannot be same as Display Order");
+                ModelState.AddModelError("name", "Name cannot be same as Display Order");
             }
             if (ModelState.IsValid)
             {
@@ -35,6 +35,60 @@ namespace Ecommerce_DotNet.Controllers
                 return RedirectToAction("Index");
             }
             return View();
+        }
+        public IActionResult Edit(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+          Category categoryById= _context.Categories.Find(id);
+            if ((categoryById == null))
+            {
+                return NotFound();
+            }
+            return View(categoryById);
+        }
+        [HttpPost]
+        public IActionResult Edit(Category category)
+        {
+           
+            if (ModelState.IsValid)
+            {
+                _context.Categories.Update(category);
+                _context.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
+        public IActionResult Delete(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+            Category categoryById = _context.Categories.Find(id);
+            if ((categoryById == null))
+            {
+                return NotFound();
+            }
+            return View(categoryById);
+
+           
+        }
+        [HttpPost,ActionName("Delete")]
+        public IActionResult DeletePost(int? id)
+        {
+            Category category = _context.Categories.Find(id);
+            if (category == null)
+            {
+                return NotFound();
+            }
+            _context.Categories.Remove(category);
+            _context.SaveChanges();
+         
+            return RedirectToAction("Index");
+
         }
 
     }
