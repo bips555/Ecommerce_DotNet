@@ -1,5 +1,5 @@
-﻿using Ecommerce_DotNet.Data;
-using Ecommerce_DotNet.Models;
+﻿using Ecommerce_DataAccess.Data;
+using Ecommerce_Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
