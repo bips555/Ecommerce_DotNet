@@ -5,8 +5,6 @@ VisualStudioVersion = 17.12.35527.113
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecommerce_DotNet", "Ecommerce_DotNet\Ecommerce_DotNet.csproj", "{DBC9D2B6-B77E-4626-BE7E-183A390521F7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecommerce_Net_Temp_Razor", "Ecommerce_Net_Temp_Razor\Ecommerce_Net_Temp_Razor.csproj", "{9747EB79-8A96-4814-86A7-DD5E0579FF03}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecommerce_DataAccess", "Ecommerce_DataAccess\Ecommerce_DataAccess.csproj", "{8624E7F7-5C4A-436B-9EB7-B09F6B976990}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecommerce_Models", "Ecommerce_Models\Ecommerce_Models.csproj", "{CDFA051A-FE18-4D81-A07C-CB6B1F1688D5}"
@@ -23,10 +21,6 @@ Global
 		{DBC9D2B6-B77E-4626-BE7E-183A390521F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DBC9D2B6-B77E-4626-BE7E-183A390521F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DBC9D2B6-B77E-4626-BE7E-183A390521F7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9747EB79-8A96-4814-86A7-DD5E0579FF03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9747EB79-8A96-4814-86A7-DD5E0579FF03}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9747EB79-8A96-4814-86A7-DD5E0579FF03}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9747EB79-8A96-4814-86A7-DD5E0579FF03}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8624E7F7-5C4A-436B-9EB7-B09F6B976990}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8624E7F7-5C4A-436B-9EB7-B09F6B976990}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8624E7F7-5C4A-436B-9EB7-B09F6B976990}.Release|Any CPU.ActiveCfg = Release|Any CPU
