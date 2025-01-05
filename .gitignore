@@ -363,3 +363,4 @@ MigrationBackup/
 FodyWeavers.xsd
 /Ecommerce_DotNet/appsettings.json
 /Ecommerce_DotNet/appsettings.Development.json
+/Ecommerce_Net_Temp_Razor/appsettings.json
