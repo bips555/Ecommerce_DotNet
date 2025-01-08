@@ -158,7 +158,7 @@ namespace Ecommerce_DataAccess.Migrations
                         {
                             Id = 4,
                             Author = "Alice Johnson",
-                            CategoryId = 4,
+                            CategoryId = 1,
                             Description = "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
                             ISBN = "SWD9999004",
                             ImageUrl = "",
@@ -172,7 +172,7 @@ namespace Ecommerce_DataAccess.Migrations
                         {
                             Id = 5,
                             Author = "Michael Brown",
-                            CategoryId = 1,
+                            CategoryId = 2,
                             Description = "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore.",
                             ISBN = "SWD9999005",
                             ImageUrl = "",
@@ -186,7 +186,7 @@ namespace Ecommerce_DataAccess.Migrations
                         {
                             Id = 6,
                             Author = "Chris Green",
-                            CategoryId = 2,
+                            CategoryId = 3,
                             Description = "Excepteur sint occaecat cupidatat non proident, sunt in culpa.",
                             ISBN = "SWD9999006",
                             ImageUrl = "",
@@ -200,7 +200,7 @@ namespace Ecommerce_DataAccess.Migrations
                         {
                             Id = 7,
                             Author = "Emily White",
-                            CategoryId = 3,
+                            CategoryId = 1,
                             Description = "Proin eget tortor risus. Donec sollicitudin molestie malesuada.",
                             ISBN = "SWD9999007",
                             ImageUrl = "",
@@ -214,7 +214,7 @@ namespace Ecommerce_DataAccess.Migrations
                         {
                             Id = 8,
                             Author = "Robert Black",
-                            CategoryId = 4,
+                            CategoryId = 2,
                             Description = "Vestibulum ac diam sit amet quam vehicula elementum.",
                             ISBN = "SWD9999008",
                             ImageUrl = "",
@@ -228,7 +228,7 @@ namespace Ecommerce_DataAccess.Migrations
                         {
                             Id = 9,
                             Author = "Sophia Blue",
-                            CategoryId = 1,
+                            CategoryId = 3,
                             Description = "Pellentesque in ipsum id orci porta dapibus.",
                             ISBN = "SWD9999009",
                             ImageUrl = "",
@@ -242,7 +242,7 @@ namespace Ecommerce_DataAccess.Migrations
                         {
                             Id = 10,
                             Author = "Ethan Gray",
-                            CategoryId = 2,
+                            CategoryId = 1,
                             Description = "Curabitur aliquet quam id dui posuere blandit.",
                             ISBN = "SWD9999010",
                             ImageUrl = "",

@@ -19,7 +19,24 @@ namespace Ecommerce_DataAccess.Repository
 
         public void Update(Product product)
         {
-           _context.Products.Update(product);
+            var productFromDb = _context.Products.FirstOrDefault(u => u.Id == product.Id);
+            if(productFromDb!=null)
+            {
+                productFromDb.Title = product.Title;
+                productFromDb.ISBN = product.ISBN;
+                productFromDb.Description = product.Description;
+                productFromDb.Author = product.Author;
+                productFromDb.ListPrice = product.ListPrice;
+                productFromDb.Price = product.Price;
+                productFromDb.Price100 = product.Price100;
+                productFromDb.Price50 = product.Price50;
+                if(product.ImageUrl != null)
+                {
+                    productFromDb.ImageUrl = product.ImageUrl;
+                }
+
+
+            }
         }
     }
 }
