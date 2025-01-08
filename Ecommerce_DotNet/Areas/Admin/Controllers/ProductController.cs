@@ -20,7 +20,7 @@ namespace Ecommerce_DotNet.Areas.Admin.Controllers
         }
         public IActionResult Index()
         {
-            List<Product> objectProductList = _unitOfWork.Product.GetAll().ToList();
+            List<Product> objectProductList = _unitOfWork.Product.GetAll(includeProperties:"Category").ToList();
            
             return View(objectProductList);
         }
