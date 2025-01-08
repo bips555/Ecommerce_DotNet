@@ -11,15 +11,15 @@
         <form method="post" class="row" enctype="multipart/form-data">
             <input asp-for="Product.Id" hidden/>
             <div class="border p-3">
-                <div class="row">
+              
 
                     <div class="form-floating py-2 col-12">
                         <label asp-for="Product.Title" class="ms-2"></label>
                         <input asp-for="Product.Title" class="form-control border-0 shadow"  />
                         <span asp-validation-for="Product.Title" class="text-danger"></span>
                     </div>
-                    <div class="form-floating py-2 col-12">
-                        <label asp-for="Product.Description" class="ms-2"></label>
+                    <div class=" py-2 col-12">
+                        <label asp-for="Product.Description" class="ms-2 text-muted"></label>
                         <textarea asp-for="Product.Description" class="form-control border-0 shadow"></textarea>
                         <span asp-validation-for="Product.Description" class="text-danger"></span>
                     </div>
@@ -69,7 +69,7 @@
                         <label asp-for="Product.ImageUrl" class="ms-2"></label>
                         <input type="file" class="form-control border-0 shadow" />
                         <span asp-validation-for="Product.ImageUrl" class="text-danger"></span>
-                    </div>
+                   
                 </div>
                 <div class="row">
                     <div class="col-6">
@@ -92,6 +92,26 @@
 
 @section Scripts{
     @{
+        <script>
+            tinymce.init({
+              selector: 'textarea',
+              plugins: [
+                // Core editing features
+                'anchor', 'autolink', 'charmap', 'codesample', 'emoticons', 'image', 'link', 'lists', 'media', 'searchreplace', 'table', 'visualblocks', 'wordcount',
+                // Your account includes a free trial of TinyMCE premium features
+                // Try the most popular premium features until Jan 22, 2025:
+                'checklist', 'mediaembed', 'casechange', 'export', 'formatpainter', 'pageembed', 'a11ychecker', 'tinymcespellchecker', 'permanentpen', 'powerpaste', 'advtable', 'advcode', 'editimage', 'advtemplate', 'ai', 'mentions', 'tinycomments', 'tableofcontents', 'footnotes', 'mergetags', 'autocorrect', 'typography', 'inlinecss', 'markdown','importword', 'exportword', 'exportpdf'
+              ],
+              toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+              tinycomments_mode: 'embedded',
+              tinycomments_author: 'Author name',
+              mergetags_list: [
+                { value: 'First.Name', title: 'First Name' },
+                { value: 'Email', title: 'Email' },
+              ],
+              ai_request: (request, respondWith) => respondWith.string(() => Promise.reject('See docs to implement AI Assistant')),
+            });
+        </script>
         <partial name="_ValidationScriptsPartial"/>
     }
 }
