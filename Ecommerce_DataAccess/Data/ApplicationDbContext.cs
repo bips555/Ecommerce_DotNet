@@ -11,6 +11,7 @@ namespace Ecommerce_DataAccess.Data
             
         }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Product> Products { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -19,6 +20,129 @@ namespace Ecommerce_DataAccess.Data
                   new Category { Id = 2, Name = "Sci-Fi", DisplayOrder = 2 },
                     new Category { Id = 3, Name = "Romance", DisplayOrder = 3 }
                 );
+            modelBuilder.Entity<Product>().HasData(
+     new Product
+     {
+         Id = 1,
+         Title = "Fortune of Time",
+         Author = "Billy Spark",
+         Description = "Praesent vitae sodales libero. Praesent molestie.",
+         ISBN = "SWD9999001",
+         ListPrice = 99,
+         Price = 90,
+         Price50 = 85,
+         Price100 = 80
+     },
+     new Product
+     {
+         Id = 2,
+         Title = "Future of Earth",
+         Author = "Jane Doe",
+         Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+         ISBN = "SWD9999002",
+         ListPrice = 120,
+         Price = 110,
+         Price50 = 105,
+         Price100 = 100
+     },
+     new Product
+     {
+         Id = 3,
+         Title = "Secrets of the Universe",
+         Author = "John Smith",
+         Description = "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+         ISBN = "SWD9999003",
+         ListPrice = 89,
+         Price = 85,
+         Price50 = 80,
+         Price100 = 75
+     },
+     new Product
+     {
+         Id = 4,
+         Title = "The Hidden Truth",
+         Author = "Alice Johnson",
+         Description = "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+         ISBN = "SWD9999004",
+         ListPrice = 95,
+         Price = 90,
+         Price50 = 85,
+         Price100 = 80
+     },
+     new Product
+     {
+         Id = 5,
+         Title = "Adventures in Coding",
+         Author = "Michael Brown",
+         Description = "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore.",
+         ISBN = "SWD9999005",
+         ListPrice = 150,
+         Price = 140,
+         Price50 = 135,
+         Price100 = 130
+     },
+     new Product
+     {
+         Id = 6,
+         Title = "Mastering .NET",
+         Author = "Chris Green",
+         Description = "Excepteur sint occaecat cupidatat non proident, sunt in culpa.",
+         ISBN = "SWD9999006",
+         ListPrice = 200,
+         Price = 190,
+         Price50 = 185,
+         Price100 = 180
+     },
+     new Product
+     {
+         Id = 7,
+         Title = "Journey to the Stars",
+         Author = "Emily White",
+         Description = "Proin eget tortor risus. Donec sollicitudin molestie malesuada.",
+         ISBN = "SWD9999007",
+         ListPrice = 110,
+         Price = 100,
+         Price50 = 95,
+         Price100 = 90
+     },
+     new Product
+     {
+         Id = 8,
+         Title = "Data Structures Unleashed",
+         Author = "Robert Black",
+         Description = "Vestibulum ac diam sit amet quam vehicula elementum.",
+         ISBN = "SWD9999008",
+         ListPrice = 130,
+         Price = 120,
+         Price50 = 115,
+         Price100 = 110
+     },
+     new Product
+     {
+         Id = 9,
+         Title = "Artificial Intelligence Basics",
+         Author = "Sophia Blue",
+         Description = "Pellentesque in ipsum id orci porta dapibus.",
+         ISBN = "SWD9999009",
+         ListPrice = 175,
+         Price = 165,
+         Price50 = 160,
+         Price100 = 155
+     },
+     new Product
+     {
+         Id = 10,
+         Title = "The Art of Problem Solving",
+         Author = "Ethan Gray",
+         Description = "Curabitur aliquet quam id dui posuere blandit.",
+         ISBN = "SWD9999010",
+         ListPrice = 140,
+         Price = 130,
+         Price50 = 125,
+         Price100 = 120
+     }
+ );
+
         }
     }
 }
