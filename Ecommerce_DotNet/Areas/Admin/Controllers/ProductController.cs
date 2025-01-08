@@ -1,6 +1,7 @@
 ﻿using Ecommerce_DataAccess.Data;
 using Ecommerce_DataAccess.Repository.IRepository;
 using Ecommerce_Models;
+using Ecommerce_Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -23,28 +24,44 @@ namespace Ecommerce_DotNet.Areas.Admin.Controllers
         }
         public IActionResult Create()
         {
-            IEnumerable<SelectListItem> CategoryList = _unitOfWork.Category.GetAll().Select(u =>
+            // ViewBag.CategoryList = CategoryList;
+            //  ViewData["CategoryList"] = CategoryList;
+            ProductVM productVM = new()
+            {
+                 Product = new Product(),
+                CategoryList = _unitOfWork.Category.GetAll().Select(u =>
 
                new SelectListItem
                {
                    Text = u.Name,
                    Value = u.Id.ToString()
-               });
-            ViewBag.CategoryList = CategoryList;
-          //  ViewData["CategoryList"] = CategoryList;
-            return View();
+               })
+            };
+            return View(productVM);
         }
         [HttpPost]
-        public IActionResult Create(Product Product)
+        public IActionResult Create(ProductVM productVM)
         {
             if (ModelState.IsValid)
             {
-                _unitOfWork.Product.Add(Product);
+                _unitOfWork.Product.Add(productVM.Product);
                 _unitOfWork.Save();
                 TempData["success"] = "Product Added Successfully";
                 return RedirectToAction("Index");
             }
-            return View();
+            else
+            {
+                productVM.CategoryList = _unitOfWork.Category.GetAll().Select(u =>
+
+                    new SelectListItem
+                    {
+                        Text = u.Name,
+                        Value = u.Id.ToString()
+                    });
+                
+                return View(productVM);
+            }
+          
         }
         public IActionResult Edit(int? id)
         {
