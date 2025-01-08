@@ -18,17 +18,19 @@ namespace Ecommerce_DotNet.Areas.Admin.Controllers
         public IActionResult Index()
         {
             List<Product> objectProductList = _unitOfWork.Product.GetAll().ToList();
-            IEnumerable<SelectListItem> CategoryList = _unitOfWork.Category.GetAll().Select(u =>
-             
-                new SelectListItem
-                {
-                    Text = u.Name,
-                    Value = u.Id.ToString()
-                } );
+           
             return View(objectProductList);
         }
         public IActionResult Create()
         {
+            IEnumerable<SelectListItem> CategoryList = _unitOfWork.Category.GetAll().Select(u =>
+
+               new SelectListItem
+               {
+                   Text = u.Name,
+                   Value = u.Id.ToString()
+               });
+            ViewBag.CategoryList = CategoryList;    
             return View();
         }
         [HttpPost]
