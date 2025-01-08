@@ -3,6 +3,7 @@ using Ecommerce_DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Ecommerce_DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250108132501_ForeignKeyRelationBetweenProductAndCategoryEstablished")]
+    partial class ForeignKeyRelationBetweenProductAndCategoryEstablished
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -85,10 +88,6 @@ namespace Ecommerce_DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ImageUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<double>("ListPrice")
                         .HasColumnType("float");
 
@@ -119,7 +118,6 @@ namespace Ecommerce_DataAccess.Migrations
                             CategoryId = 1,
                             Description = "Praesent vitae sodales libero. Praesent molestie.",
                             ISBN = "SWD9999001",
-                            ImageUrl = "",
                             ListPrice = 99.0,
                             Price = 90.0,
                             Price100 = 80.0,
@@ -133,7 +131,6 @@ namespace Ecommerce_DataAccess.Migrations
                             CategoryId = 2,
                             Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
                             ISBN = "SWD9999002",
-                            ImageUrl = "",
                             ListPrice = 120.0,
                             Price = 110.0,
                             Price100 = 100.0,
@@ -147,7 +144,6 @@ namespace Ecommerce_DataAccess.Migrations
                             CategoryId = 3,
                             Description = "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
                             ISBN = "SWD9999003",
-                            ImageUrl = "",
                             ListPrice = 89.0,
                             Price = 85.0,
                             Price100 = 75.0,
@@ -161,7 +157,6 @@ namespace Ecommerce_DataAccess.Migrations
                             CategoryId = 4,
                             Description = "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
                             ISBN = "SWD9999004",
-                            ImageUrl = "",
                             ListPrice = 95.0,
                             Price = 90.0,
                             Price100 = 80.0,
@@ -175,7 +170,6 @@ namespace Ecommerce_DataAccess.Migrations
                             CategoryId = 1,
                             Description = "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore.",
                             ISBN = "SWD9999005",
-                            ImageUrl = "",
                             ListPrice = 150.0,
                             Price = 140.0,
                             Price100 = 130.0,
@@ -189,7 +183,6 @@ namespace Ecommerce_DataAccess.Migrations
                             CategoryId = 2,
                             Description = "Excepteur sint occaecat cupidatat non proident, sunt in culpa.",
                             ISBN = "SWD9999006",
-                            ImageUrl = "",
                             ListPrice = 200.0,
                             Price = 190.0,
                             Price100 = 180.0,
@@ -203,7 +196,6 @@ namespace Ecommerce_DataAccess.Migrations
                             CategoryId = 3,
                             Description = "Proin eget tortor risus. Donec sollicitudin molestie malesuada.",
                             ISBN = "SWD9999007",
-                            ImageUrl = "",
                             ListPrice = 110.0,
                             Price = 100.0,
                             Price100 = 90.0,
@@ -217,7 +209,6 @@ namespace Ecommerce_DataAccess.Migrations
                             CategoryId = 4,
                             Description = "Vestibulum ac diam sit amet quam vehicula elementum.",
                             ISBN = "SWD9999008",
-                            ImageUrl = "",
                             ListPrice = 130.0,
                             Price = 120.0,
                             Price100 = 110.0,
@@ -231,7 +222,6 @@ namespace Ecommerce_DataAccess.Migrations
                             CategoryId = 1,
                             Description = "Pellentesque in ipsum id orci porta dapibus.",
                             ISBN = "SWD9999009",
-                            ImageUrl = "",
                             ListPrice = 175.0,
                             Price = 165.0,
                             Price100 = 155.0,
@@ -245,7 +235,6 @@ namespace Ecommerce_DataAccess.Migrations
                             CategoryId = 2,
                             Description = "Curabitur aliquet quam id dui posuere blandit.",
                             ISBN = "SWD9999010",
-                            ImageUrl = "",
                             ListPrice = 140.0,
                             Price = 130.0,
                             Price100 = 120.0,
