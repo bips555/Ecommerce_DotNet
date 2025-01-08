@@ -22,7 +22,7 @@ namespace Ecommerce_DotNet.Areas.Admin.Controllers
            
             return View(objectProductList);
         }
-        public IActionResult Create()
+        public IActionResult Upsert(int? id)
         {
             // ViewBag.CategoryList = CategoryList;
             //  ViewData["CategoryList"] = CategoryList;
@@ -37,10 +37,19 @@ namespace Ecommerce_DotNet.Areas.Admin.Controllers
                    Value = u.Id.ToString()
                })
             };
-            return View(productVM);
+            if(id == null || id == 0)
+            {
+                return View(productVM);
+            }
+          else
+            {
+                productVM.Product = _unitOfWork.Product.Get(u => u.Id == id);
+                return View(productVM);
+            }
+           
         }
         [HttpPost]
-        public IActionResult Create(ProductVM productVM)
+        public IActionResult Upsert(ProductVM productVM,IFormFile? file)
         {
             if (ModelState.IsValid)
             {
@@ -63,32 +72,8 @@ namespace Ecommerce_DotNet.Areas.Admin.Controllers
             }
           
         }
-        public IActionResult Edit(int? id)
-        {
-            if (id == null || id == 0)
-            {
-                return NotFound();
-            }
-            Product ProductById = _unitOfWork.Product.Get(u => u.Id == id);
-            if (ProductById == null)
-            {
-                return NotFound();
-            }
-            return View(ProductById);
-        }
-        [HttpPost]
-        public IActionResult Edit(Product Product)
-        {
-
-            if (ModelState.IsValid)
-            {
-                _unitOfWork.Product.Update(Product);
-                _unitOfWork.Save();
-                TempData["success"] = "Product Updated Successfully";
-                return RedirectToAction("Index");
-            }
-            return View();
-        }
+      
+       
         public IActionResult Delete(int? id)
         {
             if (id == null || id == 0)
