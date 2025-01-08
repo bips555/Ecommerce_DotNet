@@ -31,7 +31,9 @@ namespace Ecommerce_DataAccess.Data
          ListPrice = 99,
          Price = 90,
          Price50 = 85,
-         Price100 = 80
+         Price100 = 80,
+         CategoryId=1,
+         ImageUrl =""
      },
      new Product
      {
@@ -43,7 +45,9 @@ namespace Ecommerce_DataAccess.Data
          ListPrice = 120,
          Price = 110,
          Price50 = 105,
-         Price100 = 100
+         Price100 = 100,
+         CategoryId = 2,
+         ImageUrl = ""
      },
      new Product
      {
@@ -55,7 +59,9 @@ namespace Ecommerce_DataAccess.Data
          ListPrice = 89,
          Price = 85,
          Price50 = 80,
-         Price100 = 75
+         Price100 = 75,
+         CategoryId = 3,
+         ImageUrl = ""
      },
      new Product
      {
@@ -67,7 +73,9 @@ namespace Ecommerce_DataAccess.Data
          ListPrice = 95,
          Price = 90,
          Price50 = 85,
-         Price100 = 80
+         Price100 = 80,
+         CategoryId = 4,
+         ImageUrl = ""
      },
      new Product
      {
@@ -79,7 +87,9 @@ namespace Ecommerce_DataAccess.Data
          ListPrice = 150,
          Price = 140,
          Price50 = 135,
-         Price100 = 130
+         Price100 = 130,
+         CategoryId = 1,
+         ImageUrl = ""
      },
      new Product
      {
@@ -91,7 +101,8 @@ namespace Ecommerce_DataAccess.Data
          ListPrice = 200,
          Price = 190,
          Price50 = 185,
-         Price100 = 180
+         Price100 = 180, CategoryId = 2,
+         ImageUrl = ""
      },
      new Product
      {
@@ -103,7 +114,8 @@ namespace Ecommerce_DataAccess.Data
          ListPrice = 110,
          Price = 100,
          Price50 = 95,
-         Price100 = 90
+         Price100 = 90,CategoryId=3,
+         ImageUrl = ""
      },
      new Product
      {
@@ -115,7 +127,9 @@ namespace Ecommerce_DataAccess.Data
          ListPrice = 130,
          Price = 120,
          Price50 = 115,
-         Price100 = 110
+         Price100 = 110,
+         CategoryId = 4,
+         ImageUrl = ""
      },
      new Product
      {
@@ -127,7 +141,9 @@ namespace Ecommerce_DataAccess.Data
          ListPrice = 175,
          Price = 165,
          Price50 = 160,
-         Price100 = 155
+         Price100 = 155,
+         CategoryId = 1,
+         ImageUrl = ""
      },
      new Product
      {
@@ -139,7 +155,9 @@ namespace Ecommerce_DataAccess.Data
          ListPrice = 140,
          Price = 130,
          Price50 = 125,
-         Price100 = 120
+         Price100 = 120,
+         CategoryId = 2,
+         ImageUrl = ""
      }
  );
 
