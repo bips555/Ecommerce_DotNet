@@ -21,6 +21,7 @@ namespace Ecommerce_DataAccess.Repository
         {
             _context = context;
             this.dbSet = _context.Set<T>();
+            _context.Products.Include(u => u.Category);
         }
         public void Add(T entity)
         {
@@ -28,16 +29,33 @@ namespace Ecommerce_DataAccess.Repository
             
         }
 
-        public T Get(Expression<Func<T, bool>> filter)
+        public T Get(Expression<Func<T, bool>> filter, string? includeProperties = null)
         {
             IQueryable<T> query = dbSet;
             query = query.Where(filter);
-            return query.FirstOrDefault();        }
+            if (!string.IsNullOrEmpty(includeProperties))
+            {
+                foreach (var property in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    query = query.Include(property);
+                }
+            }
+        
+            return query.FirstOrDefault(); 
+        }
 
-        public IEnumerable<T> GetAll()
+        public IEnumerable<T> GetAll(string? includeProperties = null)
         {
             IQueryable<T> query = dbSet;
-          return query.ToList();
+            if (!string.IsNullOrEmpty(includeProperties))
+            {
+                foreach (var property in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    query = query.Include(property);
+                }
+            }
+
+            return query.ToList();
         }
 
         public void Remove(T entity)
