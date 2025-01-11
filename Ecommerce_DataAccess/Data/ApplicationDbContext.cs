@@ -26,7 +26,12 @@ namespace Ecommerce_DataAccess.Data
                    new Category { Id = 2, Name = "Sci-Fi", DisplayOrder = 2 },
                      new Category { Id = 3, Name = "Romance", DisplayOrder = 3 }
                  );
-             modelBuilder.Entity<Product>().HasData(
+            modelBuilder.Entity<Company>().HasData(
+              new Company { Id = 1, Name = "Book1 Tech",StreetAddress ="Tokha 06",City="KTM",State="Bagmati",PhoneNumber="9840112175",PostalCode="1324" },
+                new Company { Id = 2, Name = "Book2 Tech", StreetAddress = "Zinpe 04", City = "PKH", State = "Gandaki", PhoneNumber = "98234237560", PostalCode = "4320" },
+                  new Company { Id = 3, Name = "Book3 Tech", StreetAddress = "Lokha 03", City = "JNK", State = "Karnali", PhoneNumber = "354i0112175", PostalCode = "5675" }
+              );
+            modelBuilder.Entity<Product>().HasData(
         new Product
         {
             Id = 1,
