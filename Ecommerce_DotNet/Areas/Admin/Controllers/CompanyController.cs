@@ -74,7 +74,7 @@ namespace Ecommerce_DotNet.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult Getall()
         {
-            List<Company> objectCompanyList = _unitOfWork.Company.GetAll(includeProperties: "Category").ToList();
+            List<Company> objectCompanyList = _unitOfWork.Company.GetAll().ToList();
             return Json(new { data = objectCompanyList });
         }
 
