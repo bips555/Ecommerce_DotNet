@@ -12,9 +12,9 @@ function loadDataTable() {
             { data: 'name', "width": "20%" },
             { data: 'streetAddress', "width": "15%" },
             { data: 'state', "width": "15%" },
-            { data: 'phonenumber', "width": "10%" },
+            { data: 'phoneNumber', "width": "10%" },
             { data: 'city', "width": "15%" },
-            { data: 'postalcode', "width": "10%" },
+        
             {
                 data: 'id',
                 "render": function (data) {
@@ -24,7 +24,7 @@ function loadDataTable() {
                                 <i class="bi bi-pencil-square"></i> Edit
                             </a>
                              <a  onClick=Delete('/admin/company/delete/${data}') class="btn btn-danger mx-2">
-                                <i class="bi bi-pencil-square"></i> Delete
+                                <i class="bi bi-trash"></i> Delete
                             </a>
                         </div>
                     `;
