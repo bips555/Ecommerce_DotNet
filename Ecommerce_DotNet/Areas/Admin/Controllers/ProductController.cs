@@ -2,6 +2,8 @@
 using Ecommerce_DataAccess.Repository.IRepository;
 using Ecommerce_Models;
 using Ecommerce_Models.ViewModels;
+using Ecommerce_Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Ecommerce_DotNet.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = SD.Role_Admin)]
     public class ProductController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
