@@ -12,7 +12,7 @@ namespace Ecommerce_DataAccess.Repository.IRepository
         IEnumerable<T> GetAll(string? includeProperties = null);
         void Add(T entity); 
 
-        T Get(Expression<Func<T, bool>> filter, string? includeProperties = null);
+        T Get(Expression<Func<T, bool>> filter, string? includeProperties = null,bool tracked = true);
         void Remove(T entity);  
         void RemoveRange(IEnumerable<T> entities);
     }

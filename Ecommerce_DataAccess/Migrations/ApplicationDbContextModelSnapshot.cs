@@ -328,7 +328,6 @@ namespace Ecommerce_DataAccess.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("ApplicationUserId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("Count")
@@ -596,9 +595,7 @@ namespace Ecommerce_DataAccess.Migrations
                 {
                     b.HasOne("Ecommerce_Models.ApplicationUser", "ApplicationUser")
                         .WithMany()
-                        .HasForeignKey("ApplicationUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ApplicationUserId");
 
                     b.HasOne("Ecommerce_Models.Product", "Product")
                         .WithMany()

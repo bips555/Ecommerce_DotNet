@@ -1,6 +1,10 @@
 using System.Diagnostics;
+using System.Security.Claims;
 using Ecommerce_DataAccess.Repository.IRepository;
 using Ecommerce_Models;
+using Ecommerce_Utility;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Ecommerce_DotNet.Areas.Customer.Controllers
@@ -10,29 +14,64 @@ namespace Ecommerce_DotNet.Areas.Customer.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IUnitOfWork _unitOfWork;
-        public HomeController(ILogger<HomeController> logger,IUnitOfWork unitOfWork)
-        {
 
-            _unitOfWork = unitOfWork;   
+        public HomeController(ILogger<HomeController> logger, IUnitOfWork unitOfWork)
+        {
+            _unitOfWork = unitOfWork;
             _logger = logger;
         }
 
         public IActionResult Index()
         {
+            // Fetch products along with their categories
             IEnumerable<Product> productList = _unitOfWork.Product.GetAll(includeProperties: "Category");
             return View(productList);
         }
-        public IActionResult Details(int id)
+
+        public IActionResult Details(int productId)
         {
             ShoppingCart shoppingCart = new()
             {
-                     Product = _unitOfWork.Product.Get(u=>u.Id==id,includeProperties: "Category"),
+                Product = _unitOfWork.Product.Get(u => u.Id == productId, includeProperties: "Category"),
                 Count = 1,
-                ProductId = id
+                ProductId = productId
             };
-          
             return View(shoppingCart);
         }
+        [HttpPost]
+        [Authorize]
+        public IActionResult Details(ShoppingCart shoppingCart)
+        {
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
+            shoppingCart.ApplicationUserId = userId;
+
+            ShoppingCart cartFromDb = _unitOfWork.ShoppingCart.Get(
+                u => u.ApplicationUserId == userId && u.ProductId == shoppingCart.ProductId);
+
+            if (cartFromDb != null)
+            {
+                cartFromDb.Count += shoppingCart.Count;
+                shoppingCart.Product = _unitOfWork.Product.Get(u => u.Id == shoppingCart.ProductId, includeProperties: "Category");
+              
+                _unitOfWork.ShoppingCart.Update(cartFromDb);
+                _unitOfWork.Save();
+
+                TempData["success"] = "Cart updated successfully";
+            }
+            else
+            {
+                
+                _unitOfWork.ShoppingCart.Add(shoppingCart);
+                _unitOfWork.Save();
+               
+                TempData["success"] = "Added to Cart successfully";
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
+
+
         public IActionResult Privacy()
         {
             return View();
