@@ -52,9 +52,7 @@ namespace Ecommerce_DotNet.Areas.Customer.Controllers
             if (cartFromDb != null)
             {
                 cartFromDb.Count += shoppingCart.Count;
-                shoppingCart.Product = _unitOfWork.Product.Get(u => u.Id == shoppingCart.ProductId, includeProperties: "Category");
-              
-                _unitOfWork.ShoppingCart.Update(cartFromDb);
+               _unitOfWork.ShoppingCart.Update(cartFromDb);
                 _unitOfWork.Save();
 
                 TempData["success"] = "Cart updated successfully";
