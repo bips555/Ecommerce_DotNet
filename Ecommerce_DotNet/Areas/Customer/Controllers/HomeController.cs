@@ -54,7 +54,6 @@ namespace Ecommerce_DotNet.Areas.Customer.Controllers
                 cartFromDb.Count += shoppingCart.Count;
                _unitOfWork.ShoppingCart.Update(cartFromDb);
                 _unitOfWork.Save();
-
                 TempData["success"] = "Cart updated successfully";
             }
             else
@@ -62,7 +61,6 @@ namespace Ecommerce_DotNet.Areas.Customer.Controllers
                 
                 _unitOfWork.ShoppingCart.Add(shoppingCart);
                 _unitOfWork.Save();
-               
                 TempData["success"] = "Added to Cart successfully";
             }
 
