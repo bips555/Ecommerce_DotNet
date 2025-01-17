@@ -24,13 +24,14 @@ namespace Ecommerce_DotNet.Areas.Customer.Controllers
             var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
             ShoppingCartVM = new ShoppingCartVM()
             {
-                ShoppingCartList = _unitOfWork.ShoppingCart.GetAll(u => u.ApplicationUserId == userId, includeProperties: "Product")
-           
+                ShoppingCartList = _unitOfWork.ShoppingCart.GetAll(u => u.ApplicationUserId == userId, includeProperties: "Product"),
+                OrderHeader = new OrderHeader()
+
             };
             foreach(var item in ShoppingCartVM.ShoppingCartList)
             {
                 item.Price = GetPriceBasedOnQuantity(item);
-                ShoppingCartVM.OrderTotal += (item.Price * item.Count);
+                ShoppingCartVM.OrderHeader.OrderTotal += (item.Price * item.Count);
             };
            
              return View(ShoppingCartVM);

@@ -30,7 +30,6 @@ namespace Ecommerce_DataAccess.Repository
             OrderHeader = new OrderHeaderRepository(_context);
             OrderDetail = new OrderDetailRepository(_context);
 
-
         }
         public void Save()
         {
