@@ -106,8 +106,7 @@ namespace Ecommerce_DotNet.Areas.Customer.Controllers
             ShoppingCartVM.ShoppingCartList = _unitOfWork.ShoppingCart.GetAll(u => u.ApplicationUserId == userId, includeProperties: "Product");
             ShoppingCartVM.OrderHeader.OrderDate = System.DateTime.Now;
             ShoppingCartVM.OrderHeader.ApplicationUserId = userId;
-            ShoppingCartVM.OrderHeader.ApplicationUser = _unitOfWork.ApplicationUser.Get(u=>u.Id == userId);    
-
+            ApplicationUser applicationUser = _unitOfWork.ApplicationUser.Get(u=>u.Id == userId);    
 
             foreach (var item in ShoppingCartVM.ShoppingCartList)
             {
@@ -115,7 +114,7 @@ namespace Ecommerce_DotNet.Areas.Customer.Controllers
                 ShoppingCartVM.OrderHeader.OrderTotal += (item.Price * item.Count);
             };
 
-            if(ShoppingCartVM.OrderHeader.ApplicationUser.CompanyId.GetValueOrDefault() == 0)
+            if(applicationUser.CompanyId.GetValueOrDefault() == 0)
             {
                 foreach(var item in ShoppingCartVM.ShoppingCartList)
                 {
@@ -125,7 +124,7 @@ namespace Ecommerce_DotNet.Areas.Customer.Controllers
             }
             else
             {
-                ShoppingCartVM.OrderHeader.OrderStatus = SD.StatusApproved; ;
+                ShoppingCartVM.OrderHeader.OrderStatus = SD.StatusApproved; 
                 ShoppingCartVM.OrderHeader.PaymentStatus = SD.PaymentStatusDelayedPayment;
             }
             _unitOfWork.OrderHeader.Add(ShoppingCartVM.OrderHeader);
@@ -144,7 +143,11 @@ namespace Ecommerce_DotNet.Areas.Customer.Controllers
                 _unitOfWork.Save();
             }
 
-            return View(ShoppingCartVM);
+            return RedirectToAction(nameof(OrderConfirmation),new {id = ShoppingCartVM.OrderHeader.Id});
+        }
+        public IActionResult OrderConfirmation(int id)
+        {
+            return View(id); 
         }
         public double GetPriceBasedOnQuantity(ShoppingCart shoppingCart)
         {
