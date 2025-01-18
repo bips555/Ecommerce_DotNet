@@ -1,6 +1,7 @@
 ﻿using Ecommerce_DataAccess.Repository.IRepository;
 using Ecommerce_Models;
 using Ecommerce_Models.ViewModels;
+using Ecommerce_Utility;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -12,6 +13,7 @@ namespace Ecommerce_DotNet.Areas.Customer.Controllers
     public class CartController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
+        [BindProperty]
         public ShoppingCartVM ShoppingCartVM { get; set; }
 
         public CartController(IUnitOfWork unitOfWork)
@@ -92,6 +94,55 @@ namespace Ecommerce_DotNet.Areas.Customer.Controllers
                 item.Price = GetPriceBasedOnQuantity(item);
                 ShoppingCartVM.OrderHeader.OrderTotal += (item.Price * item.Count);
             };
+
+            return View(ShoppingCartVM);
+        }
+        [HttpPost]
+        [ActionName("Summary")]
+        public IActionResult SummaryPost()
+        {
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
+            ShoppingCartVM.ShoppingCartList = _unitOfWork.ShoppingCart.GetAll(u => u.ApplicationUserId == userId, includeProperties: "Product");
+            ShoppingCartVM.OrderHeader.OrderDate = System.DateTime.Now;
+            ShoppingCartVM.OrderHeader.ApplicationUserId = userId;
+            ShoppingCartVM.OrderHeader.ApplicationUser = _unitOfWork.ApplicationUser.Get(u=>u.Id == userId);    
+
+
+            foreach (var item in ShoppingCartVM.ShoppingCartList)
+            {
+                item.Price = GetPriceBasedOnQuantity(item);
+                ShoppingCartVM.OrderHeader.OrderTotal += (item.Price * item.Count);
+            };
+
+            if(ShoppingCartVM.OrderHeader.ApplicationUser.CompanyId.GetValueOrDefault() == 0)
+            {
+                foreach(var item in ShoppingCartVM.ShoppingCartList)
+                {
+                   ShoppingCartVM.OrderHeader.PaymentStatus = SD.StatusPending;
+                    ShoppingCartVM.OrderHeader.OrderStatus = SD.StatusPending;  
+                };
+            }
+            else
+            {
+                ShoppingCartVM.OrderHeader.OrderStatus = SD.StatusApproved; ;
+                ShoppingCartVM.OrderHeader.PaymentStatus = SD.PaymentStatusDelayedPayment;
+            }
+            _unitOfWork.OrderHeader.Add(ShoppingCartVM.OrderHeader);
+            _unitOfWork.Save();
+            foreach(var item in ShoppingCartVM.ShoppingCartList)
+            {
+                OrderDetail orderDetail = new()
+                {
+                    Count = item.Count,
+                    ProductId = item.ProductId,
+                    OrderHeaderId = ShoppingCartVM.OrderHeader.Id,
+                    Price = item.Price
+
+                };
+                _unitOfWork.OrderDetail.Add(orderDetail);
+                _unitOfWork.Save();
+            }
 
             return View(ShoppingCartVM);
         }
