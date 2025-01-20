@@ -2,7 +2,32 @@
 @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
-
+@{
+    var status = Context.Request.Query["status"];
+    var pending = "text-primary";
+    var inprocess = "text-primary";
+    var approved = "text-primary";
+    var completed = "text-primary";
+    var all = "text-primary";
+    switch(status)
+    {
+        case "pending":
+            pending = "text-primary active bg-dark text-white";
+            break;
+        case "inprocess":
+            inprocess = "text-primary active bg-dark text-white";
+            break;
+        case "completed":
+            completed = "text-primary active bg-dark text-white";
+            break;
+        case "approved":
+            approved = "text-primary active bg-dark text-white";
+            break;
+        default:
+            all = "text-primary active bg-dark text-white";
+            break;
+    }
+}
 <div class="container">
     <div class="card shadow border-0 mt-4">
         <div class="card-header bg-secondary bg-gradient ml-0 py-3">
@@ -13,6 +38,26 @@
             </div>
         </div>
         <div class="card-body p-4">
+            <div class="d-flex justify-content-between pb-5 pt-2">
+                <span></span>
+                <ul class="list-group list-group-horizontal-sm">
+                   <a style="text-decoration:none" asp-controller="Order" asp-action="Index" asp-route-status="inprocess">
+                       <li class="list-group-item @inprocess">In Process</li>
+                   </a>
+                    <a style="text-decoration:none" asp-controller="Order" asp-action="Index" asp-route-status="pending">
+                    <li class="list-group-item @pending">Payment Pending</li>
+                    </a>
+                    <a style="text-decoration:none" asp-controller="Order" asp-action="Index" asp-route-status="completed">
+                    <li class="list-group-item @completed">Completed</li>
+                    </a>
+                    <a style="text-decoration:none" asp-controller="Order" asp-action="Index" asp-route-status="approved">
+                    <li class="list-group-item @approved">Approved</li>
+                    </a>
+                    <a style="text-decoration:none" asp-controller="Order" asp-action="Index" asp-route-status="all">
+                    <li class="list-group-item @all">All</li>
+                    </a>
+                </ul>
+            </div>
             <table id="tblData" class="table table-bordered table-striped">
                 <thead>
                     <tr>
