@@ -22,7 +22,7 @@ namespace Ecommerce_DataAccess.Repository
            _context.OrderHeaders.Update(orderHeader);
         }
 
-        public void UpdateStatus(int id, string orderStatus, string paymentStatus)
+        public void UpdateStatus(int id, string orderStatus, string? paymentStatus = null)
         {
            var orderFromDb = _context.OrderHeaders.FirstOrDefault(u => u.Id == id);
             if (orderFromDb != null)
