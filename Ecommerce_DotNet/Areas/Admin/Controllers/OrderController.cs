@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Ecommerce_DotNet.Areas.Admin.Controllers
 {
+    [Area("Admin")] 
     public class OrderController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
