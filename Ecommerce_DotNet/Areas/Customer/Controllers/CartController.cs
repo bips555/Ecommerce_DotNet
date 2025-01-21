@@ -52,13 +52,15 @@ namespace Ecommerce_DotNet.Areas.Customer.Controllers
         public IActionResult Minus(int cartId)
         {
             var cart = _unitOfWork.ShoppingCart.Get(u => u.Id == cartId);
-            if (cart.Count == 1)
+            if (cart.Count <= 1)
             {
                 _unitOfWork.ShoppingCart.Remove(cart);
+                HttpContext.Session.SetInt32(SD.SessionCart, _unitOfWork.ShoppingCart.GetAll(u => u.ApplicationUserId == cart.ApplicationUserId).Count() - 1);
+
             }
             else
             {
-                cart.Count += 1;
+                cart.Count -= 1;
                 _unitOfWork.ShoppingCart.Update(cart);
             }
             _unitOfWork.Save();
@@ -69,6 +71,7 @@ namespace Ecommerce_DotNet.Areas.Customer.Controllers
             var cart = _unitOfWork.ShoppingCart.Get(u => u.Id == cartId);
            
                 _unitOfWork.ShoppingCart.Remove(cart);
+            HttpContext.Session.SetInt32(SD.SessionCart, _unitOfWork.ShoppingCart.GetAll(u => u.ApplicationUserId == cart.ApplicationUserId).Count()-1);
             _unitOfWork.Save();
           
             return RedirectToAction(nameof(Index));
@@ -195,6 +198,7 @@ namespace Ecommerce_DotNet.Areas.Customer.Controllers
                     _unitOfWork.OrderHeader.UpdateStatus(id, SD.StatusApproved, SD.PaymentStatusApproved);
                     _unitOfWork.Save();
                 }
+                HttpContext.Session.Clear();
             }
             List<ShoppingCart> shoppingCarts = _unitOfWork.ShoppingCart.GetAll(u => u.ApplicationUserId == orderHeader.ApplicationUserId).ToList();
             _unitOfWork.ShoppingCart.RemoveRange(shoppingCarts);

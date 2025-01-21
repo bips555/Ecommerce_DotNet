@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
+
 namespace Ecommerce_DotNet.Areas.Customer.Controllers
 {
     [Area("Customer")]
@@ -25,6 +26,7 @@ namespace Ecommerce_DotNet.Areas.Customer.Controllers
         {
             // Fetch products along with their categories
             IEnumerable<Product> productList = _unitOfWork.Product.GetAll(includeProperties: "Category");
+          
             return View(productList);
         }
 
@@ -36,6 +38,7 @@ namespace Ecommerce_DotNet.Areas.Customer.Controllers
                 Count = 1,
                 ProductId = productId
             };
+
             return View(shoppingCart);
         }
         [HttpPost]
@@ -53,14 +56,14 @@ namespace Ecommerce_DotNet.Areas.Customer.Controllers
             {
                 cartFromDb.Count += shoppingCart.Count;
                _unitOfWork.ShoppingCart.Update(cartFromDb);
-                _unitOfWork.Save();
+               _unitOfWork.Save();
                 TempData["success"] = "Cart updated successfully";
             }
             else
             {
-                
                 _unitOfWork.ShoppingCart.Add(shoppingCart);
                 _unitOfWork.Save();
+                HttpContext.Session.SetInt32(SD.SessionCart,_unitOfWork.ShoppingCart.GetAll(u=>u.ApplicationUserId == userId).Count());
                 TempData["success"] = "Added to Cart successfully";
             }
 
