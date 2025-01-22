@@ -65,7 +65,7 @@ namespace Ecommerce_DotNet.Areas.Admin.Controllers
             return Json(new
             {
                 success = true,
-                message = "Delete Successfull"
+                message = "Operation Successfull"
             });
 
         }
