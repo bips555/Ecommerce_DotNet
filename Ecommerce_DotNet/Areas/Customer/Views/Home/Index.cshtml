@@ -8,7 +8,14 @@
                 <div class="col-12 p-1">
                     <div class="card border-0 p-3 border-top border-5 rounded d-flex flex-column h-100">
                         <div class="position-relative">
-                           @*  <img src="@item.ImageUrl" class="card-img-top rounded" style="object-fit: cover; height: 200px;" /> *@
+                          @if(item.ProductImages!=null && item.ProductImages.Count()>0)
+                          {
+                              <img src="@item.ProductImages.FirstOrDefault().ImageUrl" class="card-img-top rounded"/>
+                          }
+                          else{
+                                <img src="https://placehold.co/500x600/png" class="card-img-top rounded" />
+
+                          }
                             <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-50"></div>
                             <div class="position-absolute top-50 start-50 translate-middle text-white w-100 text-center">
                                 <p class="h5">@item.Title</p>

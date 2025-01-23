@@ -153,10 +153,21 @@ namespace Ecommerce_DotNet.Areas.Admin.Controllers
             {
                 return Json(new { success = false, message = "Error While Deleting" });
             }
-          /* */
-           _unitOfWork.Product.Remove(productToBeDeleted);
+            string productPath = @"images\products\product-" + id;
+            string finalPath = Path.Combine(_webHostEnvironment.WebRootPath, productPath);
+
+            if (Directory.Exists(finalPath))
+            {
+                string[] filePaths = Directory.GetFiles(finalPath);
+                foreach (string filePath in filePaths)
+                {
+                    System.IO.File.Delete(filePath);
+                }
+                Directory.Delete(finalPath);
+            }
+            _unitOfWork.Product.Remove(productToBeDeleted);
             _unitOfWork.Save();
-            return Json(new { success = true, message = "Delete Successfull" });
+            return Json(new { success = true, message = "Product Deleted Successfully" });
         }
 
         #endregion
