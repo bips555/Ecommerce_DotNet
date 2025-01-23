@@ -112,6 +112,27 @@ namespace Ecommerce_DotNet.Areas.Admin.Controllers
             return View(productVM);
         }
 
+        public IActionResult DeleteImage (int? imageId)
+        {
+            var imageToBeDeleted = _unitOfWork.ProductImage.Get(u => u.Id == imageId);
+            int productId = imageToBeDeleted.ProductId;
+            if(imageToBeDeleted != null)
+            {
+                if(!string.IsNullOrEmpty(imageToBeDeleted.ImageUrl))
+                {
+                    var oldImagePath = Path.Combine(_webHostEnvironment.WebRootPath, imageToBeDeleted.ImageUrl.TrimStart('\\'));
+                    if (System.IO.File.Exists(oldImagePath))
+                    {
+                        System.IO.File.Delete(oldImagePath);
+                    }
+                }
+                _unitOfWork.ProductImage.Remove(imageToBeDeleted);
+                _unitOfWork.Save();
+                TempData["success"] = "Image Deleted Successfully";
+            }
+
+            return RedirectToAction(nameof(Upsert), new { id = productId });
+        }
 
 
 
@@ -132,11 +153,7 @@ namespace Ecommerce_DotNet.Areas.Admin.Controllers
             {
                 return Json(new { success = false, message = "Error While Deleting" });
             }
-          /*  var oldImagePath = Path.Combine(_webHostEnvironment.WebRootPath, productToBeDeleted.ImageUrl.TrimStart('\\'));
-            if (System.IO.File.Exists(oldImagePath))
-            {
-                System.IO.File.Delete(oldImagePath);
-            }*/
+          /* */
            _unitOfWork.Product.Remove(productToBeDeleted);
             _unitOfWork.Save();
             return Json(new { success = true, message = "Delete Successfull" });
