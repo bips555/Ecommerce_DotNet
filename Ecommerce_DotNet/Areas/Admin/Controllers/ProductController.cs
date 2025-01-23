@@ -67,7 +67,7 @@ namespace Ecommerce_DotNet.Areas.Admin.Controllers
                     string productPath = Path.Combine(wwwRootPath, @"images\product");
 
                     // Delete the old image if it exists
-                    if (!string.IsNullOrEmpty(productVM.Product.ImageUrl))
+                   /* if (!string.IsNullOrEmpty(productVM.Product.ImageUrl))
                     {
                         var oldImagePath = Path.Combine(wwwRootPath, productVM.Product.ImageUrl.TrimStart('\\'));
                         if (System.IO.File.Exists(oldImagePath))
@@ -81,7 +81,7 @@ namespace Ecommerce_DotNet.Areas.Admin.Controllers
                     {
                         file.CopyTo(fileStream);
                     }
-                    productVM.Product.ImageUrl = @"\images\product\" + fileName;
+                    productVM.Product.ImageUrl = @"\images\product\" + fileName;*/
                 }
                 else
                 {
@@ -89,7 +89,7 @@ namespace Ecommerce_DotNet.Areas.Admin.Controllers
                     if (productVM.Product.Id != 0)
                     {
                         var existingProduct = _unitOfWork.Product.Get(u => u.Id == productVM.Product.Id);
-                        productVM.Product.ImageUrl = existingProduct?.ImageUrl;
+                      /*  productVM.Product.ImageUrl = existingProduct?.ImageUrl;*/
                     }
                 }
 
@@ -138,11 +138,11 @@ namespace Ecommerce_DotNet.Areas.Admin.Controllers
             {
                 return Json(new { success = false, message = "Error While Deleting" });
             }
-            var oldImagePath = Path.Combine(_webHostEnvironment.WebRootPath, productToBeDeleted.ImageUrl.TrimStart('\\'));
+          /*  var oldImagePath = Path.Combine(_webHostEnvironment.WebRootPath, productToBeDeleted.ImageUrl.TrimStart('\\'));
             if (System.IO.File.Exists(oldImagePath))
             {
                 System.IO.File.Delete(oldImagePath);
-            }
+            }*/
            _unitOfWork.Product.Remove(productToBeDeleted);
             _unitOfWork.Save();
             return Json(new { success = true, message = "Delete Successfull" });

@@ -10,7 +10,7 @@
     <div class="card-body p-4">
         <form method="post" class="row" enctype="multipart/form-data">
             <input asp-for="Product.Id" hidden/>
-            <input asp-for="Product.ImageUrl" hidden/>
+           @*  <input asp-for="Product.ImageUrl" hidden/> *@
             <div class="col-10">
                 <div class="border p-3">
                     <div class="row">
@@ -68,9 +68,9 @@
                             <span asp-validation-for="Product.CategoryId" class="text-danger"></span>
                         </div>
                         <div class="form-floating py-2 col-12">
-                            <label asp-for="@Model.Product.ImageUrl" class="ms-2"></label>
+                         @*    <label asp-for="@Model.Product.ImageUrl" class="ms-2"></label>
                             <input asp-for="@Model.Product.ImageUrl" type="file" name="file" class="form-control border-0 shadow" />
-                            <span asp-validation-for="Product.ImageUrl" class="text-danger"></span>
+                            <span asp-validation-for="Product.ImageUrl" class="text-danger"></span> *@
                         </div>
                     </div>
                     <div class="row">
@@ -91,7 +91,7 @@
                 </div>
             </div>
 <div class="col-2">
-    <img src="@Model.Product.ImageUrl" width="100%" style="border-radius:5px;border:1px solid white"/>
+    @* <img src="@Model.Product.ImageUrl" width="100%" style="border-radius:5px;border:1px solid white"/> *@
 </div>          
         </form>
     </div>
@@ -107,7 +107,7 @@
                 'anchor', 'autolink', 'charmap', 'codesample', 'emoticons', 'image', 'link', 'lists', 'media', 'searchreplace', 'table', 'visualblocks', 'wordcount',
                 // Your account includes a free trial of TinyMCE premium features
                 // Try the most popular premium features until Jan 22, 2025:
-                'checklist', 'mediaembed', 'casechange', 'export', 'formatpainter', 'pageembed', 'a11ychecker', 'tinymcespellchecker', 'permanentpen', 'powerpaste', 'advtable', 'advcode', 'editimage', 'advtemplate', 'ai', 'mentions', 'tinycomments', 'tableofcontents', 'footnotes', 'mergetags', 'autocorrect', 'typography', 'inlinecss', 'markdown','importword', 'exportword', 'exportpdf'
+              
               ],
               toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
               tinycomments_mode: 'embedded',
