@@ -48,52 +48,16 @@ namespace Ecommerce_DotNet.Areas.Admin.Controllers
             }
             else
             {
-                productVM.Product = _unitOfWork.Product.Get(u => u.Id == id);
+                productVM.Product = _unitOfWork.Product.Get(u => u.Id == id,includeProperties:"ProductImages");
                 return View(productVM);
             }
 
         }
         [HttpPost]
-        public IActionResult Upsert(ProductVM productVM, IFormFile? file)
+        public IActionResult Upsert(ProductVM productVM, List<IFormFile> ? files)
         {
             if (ModelState.IsValid)
             {
-                string wwwRootPath = _webHostEnvironment.WebRootPath;
-
-                // If a new file is uploaded
-                if (file != null)
-                {
-                    string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
-                    string productPath = Path.Combine(wwwRootPath, @"images\product");
-
-                    // Delete the old image if it exists
-                   /* if (!string.IsNullOrEmpty(productVM.Product.ImageUrl))
-                    {
-                        var oldImagePath = Path.Combine(wwwRootPath, productVM.Product.ImageUrl.TrimStart('\\'));
-                        if (System.IO.File.Exists(oldImagePath))
-                        {
-                            System.IO.File.Delete(oldImagePath);
-                        }
-                    }
-
-                    // Save the new file
-                    using (var fileStream = new FileStream(Path.Combine(productPath, fileName), FileMode.Create))
-                    {
-                        file.CopyTo(fileStream);
-                    }
-                    productVM.Product.ImageUrl = @"\images\product\" + fileName;*/
-                }
-                else
-                {
-                    // If no new file is uploaded, retain the existing ImageUrl
-                    if (productVM.Product.Id != 0)
-                    {
-                        var existingProduct = _unitOfWork.Product.Get(u => u.Id == productVM.Product.Id);
-                      /*  productVM.Product.ImageUrl = existingProduct?.ImageUrl;*/
-                    }
-                }
-
-                // Add or update the product
                 if (productVM.Product.Id == 0)
                 {
                     _unitOfWork.Product.Add(productVM.Product);
@@ -102,8 +66,38 @@ namespace Ecommerce_DotNet.Areas.Admin.Controllers
                 {
                     _unitOfWork.Product.Update(productVM.Product);
                 }
-
                 _unitOfWork.Save();
+                string wwwRootPath = _webHostEnvironment.WebRootPath;
+
+                foreach(IFormFile file in files)
+                {
+                    string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                    string productPath = @"images\products\product-"+productVM.Product.Id;
+                    string finalPath = Path.Combine(wwwRootPath, productPath);
+
+                    if(!Directory.Exists(finalPath))
+                    {
+                        Directory.CreateDirectory(finalPath);
+                    }
+                    using (var fileStream = new FileStream(Path.Combine(finalPath, fileName), FileMode.Create))
+                    {
+                        file.CopyTo(fileStream);
+                    }
+                    ProductImage productImage = new()
+                    {
+                        ImageUrl = @"\"+ productPath +@"\"+ fileName,
+                        ProductId = productVM.Product.Id
+                    };
+                    if(productVM.Product.ProductImages == null)
+                    {
+                        productVM.Product.ProductImages = new List<ProductImage>();
+                    }
+                    productVM.Product.ProductImages.Add(productImage);
+                  
+                }
+                _unitOfWork.Product.Update(productVM.Product);
+                _unitOfWork.Save();
+             
                 TempData["success"] = "Product saved successfully";
                 return RedirectToAction("Index");
             }

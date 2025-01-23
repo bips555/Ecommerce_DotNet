@@ -43,8 +43,7 @@ namespace Ecommerce_Models
         [ValidateNever]
         public Category Category { get; set; }
         [ValidateNever]
-        List<ProductImage> ProductImages { get; set; }
-
+        public List<ProductImage> ProductImages { get; set; }
 
     }
 }

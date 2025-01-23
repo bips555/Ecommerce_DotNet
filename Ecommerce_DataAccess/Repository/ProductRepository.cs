@@ -31,10 +31,7 @@ namespace Ecommerce_DataAccess.Repository
                 productFromDb.Price100 = product.Price100;
                 productFromDb.Price50 = product.Price50;
                 productFromDb.CategoryId = product.CategoryId;
-               /* if (product.ImageUrl != null)
-                {
-                    productFromDb.ImageUrl = product.ImageUrl;
-                }*/
+             productFromDb.ProductImages = product.ProductImages;
 
 
             }
